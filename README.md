@@ -1,9 +1,39 @@
-# Instructions
+# CCG Conversion Tools
 
-These are simple python scripts I've been using.
+This is a React app (and legacy python scripts) to convert between print formats for cards, specifically in the ecosystems of Star Wars CCG and Star Trek CCG.
 
-The Trek folder involves taking PDFs of expansion cards from the Star Trek CCG Continuing Committee and slicing out / formatting individual images for each card so they can be printed in MPC formatting.
+CCG cards are often stored in three formats:
 
-The Star Wars folder involves doing the reverse: Taking a folder full of a set of SWCCG cards in MPC formatting and cranking out sheets of 9 cards that can be printed on a home printer (and then laminated or used as slips).
+* PDF sheets (of 9 cards) for home printing on, for example, an inkjet.
 
-See the individual READMEs in each folder for more instructions.
+* Single card images with a wider border, for professional printing via the popular MakePlayingCards.com and its clones.
+
+* Single card images that mimic the width and border of a classic card.
+
+Those doing custom card creations often create their cards in one format alone. This app is designed to provide users the ability to convert between them.
+
+
+## Current status
+
+The app is presently constrained to just converting PDF sheets (in precisely the formatting of the Trek Continuing Committee) to MPC format.
+
+
+## Legacy scripts
+
+There are older python scripts I've used and made available for a long time. They have been moved to the python folder.
+
+
+## Launching the site
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+
