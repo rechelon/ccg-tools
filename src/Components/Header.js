@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 const pages = ['PDF Cardsheet → MPC', 'MPC → PDF Cardsheet', 'Normal Cards → MPC'];
 
-function Header() {
+function Header({chooseConverter}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -25,6 +25,11 @@ function Header() {
     setAnchorElNav(null);
   };
 
+  const clickMenuItem = (page) => {
+    console.log(page);
+    chooseConverter(page);
+    handleCloseNavMenu();
+  }
 
   return (
     <AppBar 
@@ -94,7 +99,10 @@ function Header() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem 
+                  key={page} 
+                  onClick={() => clickMenuItem(page)}
+                >
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}
@@ -116,13 +124,13 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            CCG Conversion
+            CCG Converter
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => clickMenuItem(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
