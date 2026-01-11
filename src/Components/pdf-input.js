@@ -10,7 +10,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const FileInput = (props) => {
+const PdfInput = (props) => {
   const theme = useTheme();
   const wrapperRef = useRef(null);
   const bpSMd = theme.breakpoints.down("sm");
@@ -124,9 +124,9 @@ const FileInput = (props) => {
   );
 };
 
-FileInput.propTypes = {
+PdfInput.propTypes = {
   onFileChange: PropTypes.func,
 };
 
-export default FileInput;
+export default PdfInput;
 

@@ -1,11 +1,11 @@
 import React, { useState, lazy } from "react";
 import { Grid } from "@mui/material";
-import PdfInput from "../Components/pdf-input";
-import PdfConverter from "../Components/pdf-converter";
+import FileInput from "../Components/file-input";
+import FileConverter from "../Components/file-converter";
 
 
 
-const TrekPdfToMpc = (props) =>  {
+const NormalToMPC = (props) =>  {
 
   const [pdfFile, setPdfFile] = useState(null);
 
@@ -13,11 +13,11 @@ const TrekPdfToMpc = (props) =>  {
     <>
       <Grid container className="d-flex" sx={{ py: 6, px: 4}}>
       <Grid item className="box">
-        <PdfInput onFileChange={(file) => setPdfFile(file)} />  
+        <FileInput onFileChange={(file) => setPdfFile(file)} />  
       </Grid>
       {pdfFile && (
         <Grid item sx={{width: "100%"}}>
-          <PdfConverter
+          <FileConverter
             pdfUrl={URL.createObjectURL(pdfFile)}
             fileName={pdfFile.name}
           />
@@ -29,4 +29,4 @@ const TrekPdfToMpc = (props) =>  {
   )
 }
 
-export default TrekPdfToMpc;
+export default NormalToMPC;
