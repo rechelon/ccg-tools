@@ -4,23 +4,23 @@ import MuiAlert from "@mui/material/Alert";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
-import filePdf from "../assets/file-pdf.png";
+import fileNormal from "../assets/file-image.png";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const PdfInput = (props) => {
+const CardsInput = (props) => {
   const theme = useTheme();
   const wrapperRef = useRef(null);
   const bpSMd = theme.breakpoints.down("sm");
 
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    props.onFileChange(file);
-  }, [file]);
+    props.onFileChange(files);
+  }, [files]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -30,18 +30,19 @@ const PdfInput = (props) => {
   };
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
-
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
-
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
-  const onFileDrop = (e) => {
-    const newFile = e.target.files[0];
-    if (newFile && newFile.type === "application/pdf") {
-      setFile(newFile);
-    } else {
+  const onFilesDrop = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    const imageFiles = selectedFiles.filter(file => 
+      file.type.startsWith("image/");
+    );
+    if (imageFiles.length === 0 ) {
       setOpen(true);
+      return;
     }
+    setFiles(prev => [...prev, ...imageFiles]);
   };
 
   const returnSize = (file) => {
@@ -74,10 +75,10 @@ const PdfInput = (props) => {
             [bpSMd]: { fontSize: "10px" },
           }}
         >
-          This will take a 9-card PDF fitting the format used by the Continuing Committee for home printing and return the cards in formatting for printing on MakePlayingCards.com. For an example expansion PDF, see https://www.trekcc.org/1e/?id=259
+          This will take a jpg or png of a playing card (with a normal border) and give it an MPC-ready border (for printing at MakePlayingCards.com).
         </Typography>
       </Stack>
-      {!file && (
+      {files.length === 0 && (
         <Button
           ref={wrapperRef}
           className="drop-file-input"
@@ -89,22 +90,30 @@ const PdfInput = (props) => {
             <img src={uploadImg} alt="" />
             <p>Drag & Drop your files here</p>
           </div>
-          <input type="file" accept=".pdf" value="" onChange={onFileDrop} />
+          <input 
+            type="file"
+            accept="image/*"
+            multiple 
+            onChange={onFilesDrop} />
         </Button>
       )}
-      {file ? (
+      {files.length > 0 ? (
         <div className="drop-file-preview">
           <p className="drop-file-preview__title">Uploaded file</p>
-          <div className="drop-file-preview__item">
-            <img src={filePdf} alt="PDF Icon" />
-            <div className="drop-file-preview__item__info">
-              <p>{file.name}</p>
-              <p>{returnSize(file)}</p>
+          {files.map((file, index) => (
+            <div className="drop-file-preview__item" key={index}>
+              <img src={fileNormal} alt="" />
+              <div className="drop-file-preview__item__info">
+                <p>{file.name}</p>
+                <p>{returnSize(file)}</p>
+              </div>
+              <IconButton 
+                onClick={()=>setFiles(prev => prev.filter((_, i) => i !== index))}
+              >
+                <CloseOutlined />
+              </IconButton>
             </div>
-            <IconButton onClick={()=>setFile(null)}>
-              <CloseOutlined />
-            </IconButton>
-          </div>
+          ))}
         </div>
       ) : null}
       <Snackbar
@@ -124,9 +133,9 @@ const PdfInput = (props) => {
   );
 };
 
-PdfInput.propTypes = {
+CardsInput.propTypes = {
   onFileChange: PropTypes.func,
 };
 
-export default PdfInput;
+export default CardsInput;
 

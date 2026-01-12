@@ -1,25 +1,26 @@
-import React, { useState, lazy } from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import FileInput from "../Components/file-input";
-import FileConverter from "../Components/file-converter";
+import NormalInput from "../Components/normal-input";
+import NormalConverter from "../Components/normal-converter";
 
 
 
 const NormalToMPC = (props) =>  {
 
-  const [pdfFile, setPdfFile] = useState(null);
+  const [normalFile, setNormalFile] = useState(null);
 
   return (
     <>
       <Grid container className="d-flex" sx={{ py: 6, px: 4}}>
       <Grid item className="box">
-        <FileInput onFileChange={(file) => setPdfFile(file)} />  
+        <NormalInput onFileChange={(file) => setNormalFile(file)} />  
       </Grid>
-      {pdfFile && (
+      {normalFile && (
         <Grid item sx={{width: "100%"}}>
-          <FileConverter
-            pdfUrl={URL.createObjectURL(pdfFile)}
-            fileName={pdfFile.name}
+          <p>Normal Converter</p>
+          <NormalConverter
+            normalUrl={URL.createObjectURL(normalFile)}
+            fileName={normalFile.name}
           />
         </Grid>
       )}

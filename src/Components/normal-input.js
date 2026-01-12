@@ -4,13 +4,13 @@ import MuiAlert from "@mui/material/Alert";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
-import filePdf from "../assets/file-pdf.png";
+import fileNormal from "../assets/file-image.png";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const PdfInput = (props) => {
+const NormalInput = (props) => {
   const theme = useTheme();
   const wrapperRef = useRef(null);
   const bpSMd = theme.breakpoints.down("sm");
@@ -30,14 +30,12 @@ const PdfInput = (props) => {
   };
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
-
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
-
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
-    if (newFile && newFile.type === "application/pdf") {
+    if (newFile && newFile.type.startsWith("image/")) {
       setFile(newFile);
     } else {
       setOpen(true);
@@ -74,7 +72,7 @@ const PdfInput = (props) => {
             [bpSMd]: { fontSize: "10px" },
           }}
         >
-          This will take a 9-card PDF fitting the format used by the Continuing Committee for home printing and return the cards in formatting for printing on MakePlayingCards.com. For an example expansion PDF, see https://www.trekcc.org/1e/?id=259
+          This will take a jpg or png of a playing card (with a normal border) and give it an MPC-ready border (for printing at MakePlayingCards.com).
         </Typography>
       </Stack>
       {!file && (
@@ -89,14 +87,14 @@ const PdfInput = (props) => {
             <img src={uploadImg} alt="" />
             <p>Drag & Drop your files here</p>
           </div>
-          <input type="file" accept=".pdf" value="" onChange={onFileDrop} />
+          <input type="file" accept="image/*" value="" onChange={onFileDrop} />
         </Button>
       )}
       {file ? (
         <div className="drop-file-preview">
           <p className="drop-file-preview__title">Uploaded file</p>
           <div className="drop-file-preview__item">
-            <img src={filePdf} alt="PDF Icon" />
+            <img src={fileNormal} alt="PNG Icon" />
             <div className="drop-file-preview__item__info">
               <p>{file.name}</p>
               <p>{returnSize(file)}</p>
@@ -124,9 +122,9 @@ const PdfInput = (props) => {
   );
 };
 
-PdfInput.propTypes = {
+NormalInput.propTypes = {
   onFileChange: PropTypes.func,
 };
 
-export default PdfInput;
+export default NormalInput;
 
