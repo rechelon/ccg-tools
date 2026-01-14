@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./Components/Header";
 //import Home from "./Components/Home";
 import TrekPdfToMpc from './Components/TrekPdfToMpc';
+import NormalToMpc from './Components/NormalToMpc';
 //const SwMpcToPdf = lazy(() => import('./Components/SwMpcToPdf'));
 
 
@@ -22,6 +23,10 @@ function App() {
         { activeConverter === 'PDF Cardsheet → MPC' && (
           <TrekPdfToMpc />
         )}
+        { activeConverter === 'Normal Cards → MPC' && (
+          <NormalToMpc />
+        )}
+
       </div>
   );
 }
