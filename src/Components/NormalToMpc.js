@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import NormalInput from "../Components/normal-input";
 import NormalConverter from "../Components/normal-converter";
 
@@ -10,11 +10,9 @@ const NormalToMPC = (props) =>  {
   const [normalFile, setNormalFile] = useState(null);
 
   return (
-    <>
-      <Grid container className="d-flex" sx={{ py: 6, px: 4}}>
-      <Grid item className="box">
-        <NormalInput onFileChange={(file) => setNormalFile(file)} />  
-      </Grid>
+
+    <Container maxWidth="md" sx={{ py: 6 }}>
+      <NormalInput onFileChange={(file) => setNormalFile(file)} />  
       {normalFile && (
         <Grid item sx={{width: "100%"}}>
           <p>Normal Converter</p>
@@ -24,9 +22,7 @@ const NormalToMPC = (props) =>  {
           />
         </Grid>
       )}
-    </Grid>
-
-    </>
+    </Container>
   )
 }
 

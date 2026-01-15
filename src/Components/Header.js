@@ -1,112 +1,34 @@
-import trekImg from "../assets/star-trek-1e.jpg";
-import swImg from "../assets/star-wars-ccg.jpg";
-
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
+import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
 
-const pages = ['PDF Cardsheet → MPC', 'MPC → PDF Cardsheet', 'Normal Cards → MPC'];
 
-function Header({chooseConverter}) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const clickMenuItem = (page) => {
-    console.log(page);
-    chooseConverter(page);
-    handleCloseNavMenu();
-  }
+function Header({currentPage, setCurrentPage, tools}) {
 
   return (
-    <AppBar 
-      position="static"
-      style={{background:'#000'}}
-      >
-      <Container >
-        <Toolbar disableGutters>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <img 
-              src={trekImg}
-              alt=''
-              style={{
-                height:100,
-                paddingRight:10,
-              }}
-            />
-            <img 
-              src={swImg}
-              alt=''
-              style={{
-                height:100,
-                paddingRight:10,
-              }}
-            />
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => clickMenuItem(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+  <AppBar position="static" color="default" elevation={1}>
+    <Toolbar>
+      {currentPage === 'home' ? (
+        <Typography variant="h5" component="h1">
+          CCG Formatting & Printing Tools
+        </Typography>
+      ) : (
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <IconButton 
+            onClick={() => setCurrentPage('home')}
+            edge="start"
+          >
+            <ArrowBack />
+          </IconButton>
+          <Typography variant="h6" component="h1">
+            {tools.find(t => t.id === currentPage)?.name}
+          </Typography>
+        </Box>
+      )}
+    </Toolbar>
+  </AppBar>
 
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => clickMenuItem(page)}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-
-        </Toolbar>
-      </Container>
-    </AppBar>
   );
 }
 export default Header;

@@ -1,19 +1,14 @@
 import { CloseOutlined } from "@mui/icons-material";
-import { Button,IconButton,Snackbar,Stack,Typography,useTheme} from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
+import { Box,Button,IconButton,Snackbar,Stack,Typography,useTheme, Paper} from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
 import fileNormal from "../assets/file-image.png";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 const CardsInput = (props) => {
   const theme = useTheme();
   const wrapperRef = useRef(null);
-  const bpSMd = theme.breakpoints.down("sm");
 
   const [files, setFiles] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -36,7 +31,7 @@ const CardsInput = (props) => {
   const onFilesDrop = (e) => {
     const selectedFiles = Array.from(e.target.files);
     const imageFiles = selectedFiles.filter(file => 
-      file.type.startsWith("image/");
+      file.type.startsWith("image/")
     );
     if (imageFiles.length === 0 ) {
       setOpen(true);
@@ -58,26 +53,24 @@ const CardsInput = (props) => {
   };
 
   return (
-    <>
-      <Stack
-        direction="row"
-        spacing={1}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ marginBottom: 3 }}
+
+    <Paper sx={{ p: 4 }}>
+      <Typography variant="h6" gutterBottom>
+        Select multiple image files to upload. This will take those cards (formatted with MPC border) and return a PDF with pages of nine cards, for home printing. 
+      </Typography>
+      <Box
+        sx={{
+          border: 2,
+          borderStyle: 'dashed',
+          borderColor: 'grey.300',
+          borderRadius: 1,
+          p: 6,
+          textAlign: 'center',
+          cursor: 'pointer',
+          '&:hover': { borderColor: 'primary.main' }
+        }}
       >
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: "14px",
-            letterSpacing: 1,
-            color: "text.primary",
-            [bpSMd]: { fontSize: "10px" },
-          }}
-        >
-          This will take a jpg or png of a playing card (with a normal border) and give it an MPC-ready border (for printing at MakePlayingCards.com).
-        </Typography>
-      </Stack>
+
       {files.length === 0 && (
         <Button
           ref={wrapperRef}
@@ -96,8 +89,10 @@ const CardsInput = (props) => {
             multiple 
             onChange={onFilesDrop} />
         </Button>
+
       )}
       {files.length > 0 ? (
+
         <div className="drop-file-preview">
           <p className="drop-file-preview__title">Uploaded file</p>
           {files.map((file, index) => (
@@ -115,21 +110,13 @@ const CardsInput = (props) => {
             </div>
           ))}
         </div>
+
       ) : null}
-      <Snackbar
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={open}
-        autoHideDuration={4000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Please upload pdf only
-        </Alert>
-      </Snackbar>
-    </>
+
+
+      </Box>
+    </Paper>
+
   );
 };
 

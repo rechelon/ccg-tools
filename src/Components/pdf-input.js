@@ -1,19 +1,14 @@
 import { CloseOutlined } from "@mui/icons-material";
-import { Button,IconButton,Snackbar,Stack,Typography,useTheme} from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
+import { Box,Button,IconButton,Snackbar,Stack,Typography,useTheme, Paper} from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
 import filePdf from "../assets/file-pdf.png";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 const PdfInput = (props) => {
   const theme = useTheme();
   const wrapperRef = useRef(null);
-  const bpSMd = theme.breakpoints.down("sm");
 
   const [file, setFile] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -57,42 +52,41 @@ const PdfInput = (props) => {
   };
 
   return (
-    <>
-      <Stack
-        direction="row"
-        spacing={1}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ marginBottom: 3 }}
+    <Paper sx={{ p: 4 }}>
+      <Typography variant="h6" gutterBottom>
+        This will take a 9-card PDF fitting the format used by the Continuing Committee for home printing and return the cards in formatting for printing on MakePlayingCards.com. For an example expansion PDF, see https://www.trekcc.org/1e/?id=259
+      </Typography>
+      <Box
+        sx={{
+          border: 2,
+          borderStyle: 'dashed',
+          borderColor: 'grey.300',
+          borderRadius: 1,
+          p: 6,
+          textAlign: 'center',
+          cursor: 'pointer',
+          '&:hover': { borderColor: 'primary.main' }
+        }}
       >
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: "14px",
-            letterSpacing: 1,
-            color: "text.primary",
-            [bpSMd]: { fontSize: "10px" },
-          }}
-        >
-          This will take a 9-card PDF fitting the format used by the Continuing Committee for home printing and return the cards in formatting for printing on MakePlayingCards.com. For an example expansion PDF, see https://www.trekcc.org/1e/?id=259
-        </Typography>
-      </Stack>
+
       {!file && (
-        <Button
-          ref={wrapperRef}
-          className="drop-file-input"
-          onDragEnter={onDragEnter}
-          onDragLeave={onDragLeave}
-          onDrop={onDrop}
-        >
-          <div className="drop-file-input__label">
-            <img src={uploadImg} alt="" />
-            <p>Drag & Drop your files here</p>
-          </div>
-          <input type="file" accept=".pdf" value="" onChange={onFileDrop} />
-        </Button>
+          <Button
+            ref={wrapperRef}
+            className="drop-file-input"
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
+            onDrop={onDrop}
+          >
+            <div className="drop-file-input__label">
+              <img src={uploadImg} alt="" />
+              <p>Drag & Drop your files here</p>
+            </div>
+            <input type="file" accept=".pdf" value="" onChange={onFileDrop} />
+          </Button>
+
       )}
       {file ? (
+
         <div className="drop-file-preview">
           <p className="drop-file-preview__title">Uploaded file</p>
           <div className="drop-file-preview__item">
@@ -106,21 +100,13 @@ const PdfInput = (props) => {
             </IconButton>
           </div>
         </div>
+
+
       ) : null}
-      <Snackbar
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={open}
-        autoHideDuration={4000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Please upload pdf only
-        </Alert>
-      </Snackbar>
-    </>
+
+      </Box>
+    </Paper>
+
   );
 };
 

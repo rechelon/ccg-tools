@@ -104,7 +104,6 @@ function PdfConverter({ pdfUrl, fileName }) {
 
     for (let pageIndex = 0; pageIndex < imagesList.length; pageIndex++) {
       console.log(`looping thru crops ${pageIndex}`);
-      const baseName = `page-${pageIndex + 1}`;
       const img = new Image();
       img.src = imagesList[pageIndex];
 
@@ -163,11 +162,6 @@ function PdfConverter({ pdfUrl, fileName }) {
   }
 
 
-
-  useEffect(() => {
-    myRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [imageUrls]);
-
   const downloadImage = (url, index) => {
     const a = document.createElement("a");
     a.href = url;
@@ -181,7 +175,7 @@ function PdfConverter({ pdfUrl, fileName }) {
 
 
   return (
-    <Box sx={{ my: 4, textAlign: "center" }} ref={myRef} id="image-container">
+    <Box sx={{ my: 4, textAlign: "center" }} id="image-container">
       {loading ? (
         <CircularProgress />
       ) : (
