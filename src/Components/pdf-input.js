@@ -1,5 +1,5 @@
 import { CloseOutlined } from "@mui/icons-material";
-import { Box,Button,IconButton,Snackbar,Stack,Typography,useTheme, Paper} from "@mui/material";
+import { Box,Button,IconButton,Typography,useTheme, Paper} from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
@@ -7,11 +7,10 @@ import filePdf from "../assets/file-pdf.png";
 
 
 const PdfInput = (props) => {
-  const theme = useTheme();
   const wrapperRef = useRef(null);
 
   const [file, setFile] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  //const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     props.onFileChange(file);
@@ -21,7 +20,7 @@ const PdfInput = (props) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    //setOpen(false);
   };
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
@@ -34,9 +33,10 @@ const PdfInput = (props) => {
     const newFile = e.target.files[0];
     if (newFile && newFile.type === "application/pdf") {
       setFile(newFile);
-    } else {
-      setOpen(true);
-    }
+    } 
+    //else {
+    //  setOpen(true);
+    //}
   };
 
   const returnSize = (file) => {

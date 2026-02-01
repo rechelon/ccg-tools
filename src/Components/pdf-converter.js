@@ -22,7 +22,6 @@ pdfjsLib.GlobalWorkerOptions.workerPort = new Worker(
 
 
 function PdfConverter({ pdfUrl, fileName }) {
-  const myRef = React.createRef();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

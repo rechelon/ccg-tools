@@ -1,5 +1,5 @@
 import { CloseOutlined } from "@mui/icons-material";
-import { Box,Button,IconButton,Snackbar,Stack,Typography,useTheme, Paper} from "@mui/material";
+import { Box,Button,IconButton,Typography,useTheme, Paper} from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import uploadImg from "../assets/file-upload.png";
@@ -7,22 +7,14 @@ import fileNormal from "../assets/file-image.png";
 
 
 const CardsInput = (props) => {
-  const theme = useTheme();
   const wrapperRef = useRef(null);
 
   const [files, setFiles] = useState([]);
-  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    props.onFileChange(files);
+    props.onFilesChange(files);
   }, [files]);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
@@ -34,7 +26,7 @@ const CardsInput = (props) => {
       file.type.startsWith("image/")
     );
     if (imageFiles.length === 0 ) {
-      setOpen(true);
+      //setOpen(true);
       return;
     }
     setFiles(prev => [...prev, ...imageFiles]);
@@ -121,7 +113,7 @@ const CardsInput = (props) => {
 };
 
 CardsInput.propTypes = {
-  onFileChange: PropTypes.func,
+  onFilesChange: PropTypes.func,
 };
 
 export default CardsInput;
