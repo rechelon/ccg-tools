@@ -68,7 +68,6 @@ const NormalInput = (props) => {
         >
           <div className="drop-file-input__label">
             <img src={uploadImg} alt="" />
-            <p>Drag & Drop your files here</p>
           </div>
           <input type="file" accept="image/*" value="" onChange={onFileDrop} />
         </Button>

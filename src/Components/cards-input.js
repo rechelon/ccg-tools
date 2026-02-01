@@ -73,7 +73,6 @@ const CardsInput = (props) => {
         >
           <div className="drop-file-input__label">
             <img src={uploadImg} alt="" />
-            <p>Drag & Drop your files here</p>
           </div>
           <input 
             type="file"
@@ -89,7 +88,7 @@ const CardsInput = (props) => {
           <p className="drop-file-preview__title">Uploaded file</p>
           {files.map((file, index) => (
             <div className="drop-file-preview__item" key={index}>
-              <img src={fileNormal} alt="" />
+              <img src={fileNormal} alt="" width="100" />
               <div className="drop-file-preview__item__info">
                 <p>{file.name}</p>
                 <p>{returnSize(file)}</p>

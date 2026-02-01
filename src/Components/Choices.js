@@ -21,9 +21,7 @@ function Header({currentPage, setCurrentPage, tools}) {
               onClick={() => setCurrentPage(tool.id)}
             >
               <CardContent>
-                <Avatar sx={{ bgcolor: 'primary.light', mb: 2 }}>
                   <img src={tool.icon} alt='' />
-                </Avatar>
                 <Typography variant="body1" fontWeight="medium" gutterBottom>
                   {tool.name}
                 </Typography>
