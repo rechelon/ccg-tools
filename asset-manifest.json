@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ccg-tools/static/css/main.03a93e28.css",
+    "main.js": "/ccg-tools/static/js/main.b4a85235.js",
+    "static/js/226.856563d4.chunk.js": "/ccg-tools/static/js/226.856563d4.chunk.js",
+    "static/js/453.edbd3e71.chunk.js": "/ccg-tools/static/js/453.edbd3e71.chunk.js",
+    "static/media/star-trek-1e.jpg": "/ccg-tools/static/media/star-trek-1e.24b2cee2f8c675bfe5bc.jpg",
+    "static/media/pdf-to-mpc.png": "/ccg-tools/static/media/pdf-to-mpc.06f802dd092a0aaf33eb.png",
+    "static/media/normal-to-mpc.png": "/ccg-tools/static/media/normal-to-mpc.f0466cbda4ad0c92ef2b.png",
+    "static/media/to-pdf.png": "/ccg-tools/static/media/to-pdf.82ea29c7ad395f74f7f8.png",
+    "static/media/star-wars-ccg.jpg": "/ccg-tools/static/media/star-wars-ccg.c0ac0dd263e470b3dc59.jpg",
+    "static/media/file-image.png": "/ccg-tools/static/media/file-image.711b2f6db4d7424bd4fb.png",
+    "static/media/file-pdf.png": "/ccg-tools/static/media/file-pdf.6b23920bd76015c8e37c.png",
+    "static/media/file-upload.png": "/ccg-tools/static/media/file-upload.f310cb09bc4446fa1f7a.png",
+    "index.html": "/ccg-tools/index.html",
+    "main.03a93e28.css.map": "/ccg-tools/static/css/main.03a93e28.css.map",
+    "main.b4a85235.js.map": "/ccg-tools/static/js/main.b4a85235.js.map",
+    "226.856563d4.chunk.js.map": "/ccg-tools/static/js/226.856563d4.chunk.js.map",
+    "453.edbd3e71.chunk.js.map": "/ccg-tools/static/js/453.edbd3e71.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.03a93e28.css",
+    "static/js/main.b4a85235.js"
+  ]
+}
